@@ -1,11 +1,12 @@
 "use client";
+
 import React, { useRef, useState } from "react";
 import Link from "next/link";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 
 const animationHeader = {
   hidden: {
-    y: "-100%",
+    y: "-80%",
   },
   visible: {
     y: "0",
@@ -31,7 +32,8 @@ export function Header() {
       variants={animationHeader}
       animate={isHidden ? "hidden" : "visible"}
       whileHover="visible"
-      className="fixed top-0 flex justify-center w-full z-10 mt-4"
+      transition={{ duration: 0.2 }}
+      className="fixed top-0 flex justify-center w-full z-10 pt-4"
     >
       <div className="bg-slate-800/60 rounded-md backdrop-blur-lg">
         <div className="px-8 py-4 flex gap-4 items-center">
