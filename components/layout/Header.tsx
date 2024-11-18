@@ -3,6 +3,7 @@
 import React, { useRef, useState } from "react";
 import Link from "next/link";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+import clsx from "clsx";
 
 const animationHeader = {
   hidden: {
@@ -14,6 +15,8 @@ const animationHeader = {
 };
 
 export function Header() {
+  const [currentSection, setCurrentSection] = useState("hero");
+
   const [isHidden, setIsHidden] = useState(false);
   const { scrollY } = useScroll();
   const lastVref = useRef(0);
@@ -27,6 +30,10 @@ export function Header() {
     }
   });
 
+  function changeSection(section: string) {
+    setCurrentSection(section)
+  }
+
   return (
     <motion.div
       variants={animationHeader}
@@ -39,21 +46,36 @@ export function Header() {
         <div className="px-8 py-4 flex gap-4 items-center">
           <Link
             href="#hero"
-            className="antialiased font-semibold text-blue-500"
+            className={clsx([
+              "font-semibold",
+              {
+                "text-blue-500": currentSection == "hero",
+              },
+            ])}
           >
             Home
           </Link>
 
           <Link
             href="#about"
-            className="antialiased font-semibold"
+            className={clsx([
+              "font-semibold",
+              {
+                "text-blue-500": currentSection == "about",
+              },
+            ])}
           >
             About me
           </Link>
 
           <Link
             href="#contact"
-            className="antialiased font-semibold"
+            className={clsx([
+              "font-semibold",
+              {
+                "text-blue-500": currentSection == "contact",
+              },
+            ])}
           >
             Contact
           </Link>
