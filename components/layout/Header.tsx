@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 const animationHeader = {
   hidden: {
@@ -26,6 +27,29 @@ export function Header() {
       lastVref.current = y;
     }
   });
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const sections = document.querySelectorAll("section");
+    const options = {
+      root: null, 
+      threshold: 0.5,
+    };
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const sectionId = entry.target.id;
+          router.replace(`#${sectionId}`, { scroll: false });
+        }
+      });
+    }, options);
+
+    sections.forEach(section => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, [router]);
 
   return (
     <motion.div
