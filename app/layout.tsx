@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
+import { SplashScreen } from "./_components/SplashScreen";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -21,6 +22,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className={`${interFont.className} antialiased`}>
+        <SplashScreen />
         <Header />
         {children}
       </body>
