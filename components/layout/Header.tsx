@@ -3,7 +3,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+<<<<<<< HEAD
 import { useRouter } from "next/navigation";
+=======
+import clsx from "clsx";
+>>>>>>> 9e829fdafa0cebbfa5c9178d3bbc39fe86d2c7ca
 
 const animationHeader = {
   hidden: {

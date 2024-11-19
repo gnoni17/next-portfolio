@@ -1,4 +1,5 @@
 import React from "react";
+import FlyingButton from "./FlyingButton";
 
 export function ContactForm() {
   return (
@@ -15,7 +16,8 @@ export function ContactForm() {
 
       <div className="flex justify-end gap-4">
         <button className="btn btn-outline w-fit">Clear</button>
-        <button className="btn btn-primary w-fit">Send</button>
+        <FlyingButton />
+        {/* <button className="btn btn-primary w-fit">Send</button> */}
       </div>
     </form>
   );
