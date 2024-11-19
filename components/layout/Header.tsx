@@ -3,11 +3,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
-<<<<<<< HEAD
 import { useRouter } from "next/navigation";
-=======
 import clsx from "clsx";
->>>>>>> 9e829fdafa0cebbfa5c9178d3bbc39fe86d2c7ca
 
 const animationHeader = {
   hidden: {
@@ -19,6 +16,9 @@ const animationHeader = {
 };
 
 export function Header() {
+  const [currentSection, setcurrentSection] = useState("hero");
+  const router = useRouter();
+
   const [isHidden, setIsHidden] = useState(false);
   const { scrollY } = useScroll();
   const lastVref = useRef(0);
@@ -32,12 +32,10 @@ export function Header() {
     }
   });
 
-  const router = useRouter();
-
   useEffect(() => {
     const sections = document.querySelectorAll("section");
     const options = {
-      root: null, 
+      root: null,
       threshold: 0.5,
     };
 
@@ -45,6 +43,7 @@ export function Header() {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const sectionId = entry.target.id;
+          setcurrentSection(sectionId);
           router.replace(`#${sectionId}`, { scroll: false });
         }
       });
@@ -67,21 +66,36 @@ export function Header() {
         <div className="px-8 py-4 flex gap-4 items-center">
           <Link
             href="#hero"
-            className="antialiased font-semibold text-blue-500"
+            className={clsx([
+              "font-semibold",
+              {
+                "text-blue-500": currentSection == "hero",
+              },
+            ])}
           >
             Home
           </Link>
 
           <Link
             href="#about"
-            className="antialiased font-semibold"
+            className={clsx([
+              "font-semibold",
+              {
+                "text-blue-500": currentSection == "about",
+              },
+            ])}
           >
             About me
           </Link>
 
           <Link
             href="#contact"
-            className="antialiased font-semibold"
+            className={clsx([
+              "font-semibold",
+              {
+                "text-blue-500": currentSection == "contact",
+              },
+            ])}
           >
             Contact
           </Link>
