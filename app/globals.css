@@ -17,11 +17,15 @@
     @apply px-4 py-2 rounded-md bg-slate-900 outline-none w-full;
   }
 
+  .input-error {
+    @apply border border-red-500;
+  }
+
   .btn {
-    @apply px-4 py-2 rounded-md font-semibold text-sm duration-200;
+    @apply px-4 py-2 rounded-md font-semibold text-sm duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
   }
   .btn.btn-primary {
-    @apply bg-blue-500 hover:bg-blue-400 text-white;
+    @apply bg-blue-500 hover:bg-blue-400 text-white disabled:hover:bg-blue-500;
   }
   .btn.btn-outline {
     @apply border border-slate-400 hover:opacity-80;
