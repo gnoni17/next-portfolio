@@ -2,17 +2,26 @@
 
 import { useState } from "react";
 import clsx from "clsx";
+import { sendEmail } from "../actions/sendEmail";
+
+type RequestStatusType = "initial" | "pending" | "success" | "error";
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const initialModel = {
+  name: "",
+  email: "",
+  message: "",
+};
 
 export function ContactForm() {
-  const [model, setModel] = useState({
-    name: "",
-    description: "",
-  });
+  const [model, setModel] = useState({ ...initialModel });
   const [isDirty, setIsDirty] = useState(false);
+  const [requestStatus, setRequestStatus] = useState<RequestStatusType>("initial");
 
   const nameIsValid = model.name.length >= 3;
-  const descriptionIsValid = model.description.length >= 5;
-  const formIsValid = nameIsValid && descriptionIsValid;
+  const messageIsValid = model.message.length >= 10;
+  const emailIsValid = emailRegex.test(model.email);
+  const formIsValid = nameIsValid && messageIsValid && emailIsValid;
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     const { name, value } = e.target;
@@ -21,12 +30,24 @@ export function ContactForm() {
     setModel(state => ({ ...state, [name]: value }));
   }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setRequestStatus("pending");
 
     if (formIsValid) {
-      console.log("submit");
+      try {
+        await sendEmail(model);
+        setRequestStatus("success");
+        clear();
+      } catch (_) {
+        setRequestStatus("error");
+      }
     }
+  }
+
+  function clear() {
+    setModel({ ...initialModel });
+    setIsDirty(false);
   }
 
   return (
@@ -50,26 +71,49 @@ export function ContactForm() {
       </label>
 
       <label>
-        <span className="text-sm block mb-1">Descrizione</span>
-
-        <textarea
-          name="description"
+        <span className="text-sm block mb-1">Email</span>
+        <input
+          type="email"
+          name="email"
           required
-          minLength={5}
-          value={model.description}
+          value={model.email}
           onChange={handleInputChange}
           className={clsx({
-            "input-error": !descriptionIsValid && isDirty,
+            "input-error": !emailIsValid && isDirty,
+          })}
+        />
+      </label>
+
+      <label>
+        <span className="text-sm block mb-1">Messaggio</span>
+
+        <textarea
+          name="message"
+          required
+          minLength={5}
+          value={model.message}
+          onChange={handleInputChange}
+          className={clsx({
+            "input-error": !messageIsValid && isDirty,
           })}
         ></textarea>
+
+        <span className="text-sm text-gray-500 block">Minimo 10 caratteri</span>
       </label>
+
+      {requestStatus == "error" && (
+        <div className="bg-red-500 text-white p-4 rounded-md">
+          <span>Ops, qualcosa è andato storto</span>
+        </div>
+      )}
 
       <div className="flex justify-end gap-4">
         <button
           type="button"
+          onClick={clear}
           className="btn btn-outline w-fit"
         >
-          Clear
+          Pulisci
         </button>
 
         <button
@@ -77,7 +121,7 @@ export function ContactForm() {
           disabled={!formIsValid}
           className="btn btn-primary w-fit"
         >
-          Send
+          {requestStatus === "pending" ? "Invio in corso..." : "Invia"}
         </button>
       </div>
     </form>
