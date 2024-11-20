@@ -3,7 +3,19 @@
 import nodemailer from "nodemailer";
 import Mail from "nodemailer/lib/mailer";
 
-export async function sendEmail({ email, message, name }: { name: string; email: string; message: string }) {
+interface FormField {
+  name: string;
+  email: string;
+  message: string;
+  surname: string;
+}
+
+export async function sendEmail({ email, message, name, surname }: FormField) {
+  if (surname.length > 0) {
+    // honeypoint
+    return;
+  }
+
   const transport = nodemailer.createTransport({
     service: "gmail",
     auth: {

@@ -11,6 +11,7 @@ const initialModel = {
   name: "",
   email: "",
   message: "",
+  surname: ""
 };
 
 export function ContactForm() {
@@ -55,6 +56,15 @@ export function ContactForm() {
       onSubmit={handleSubmit}
       className="flex flex-col gap-4 border border-gray-700 bg-slate-800 p-4 rounded-md"
     >
+      <label className="hidden">
+        <input
+          type="text"
+          name="surname"
+          value={model.surname}
+          onChange={handleInputChange}
+        />
+      </label>
+
       <label>
         <span className="text-sm block mb-1">Nome</span>
         <input
