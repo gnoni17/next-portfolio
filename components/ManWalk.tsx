@@ -1,53 +1,19 @@
 "use client";
 
 import { useEffect } from "react";
-import { useAnimate } from "framer-motion";
+import { DOMKeyframesDefinition, DynamicAnimationOptions, useAnimate } from "framer-motion";
 
 export function ManWalk() {
   const [scope, animate] = useAnimate();
 
   function moveArmsAndLegs() {
-    animate(
-      "#left-leg",
-      { rotate: [-30, 30, -30] },
-      {
-        repeat: Infinity,
-        duration: 1,
-        ease: "easeInOut",
-      }
-    );
+    const animation: DOMKeyframesDefinition = { rotate: [-30, 30, -30] };
+    const transition: DynamicAnimationOptions = { repeat: Infinity, duration: 1, ease: "easeInOut" };
 
-    animate(
-      "#right-arm",
-      { rotate: [-30, 30, -30] },
-      {
-        repeat: Infinity,
-        duration: 1,
-        ease: "easeInOut",
-        delay: 0.5,
-      }
-    );
-
-    animate(
-      "#right-leg",
-      { rotate: [-30, 30, -30] },
-      {
-        repeat: Infinity,
-        duration: 1,
-        ease: "easeInOut",
-        delay: 0.5,
-      }
-    );
-
-    animate(
-      "#left-arm",
-      { rotate: [-30, 30, -30] },
-      {
-        repeat: Infinity,
-        duration: 1,
-        ease: "easeInOut",
-      }
-    );
+    animate("#left-leg", animation, transition);
+    animate("#right-leg", animation, { ...transition, delay: 0.5 });
+    animate("#left-arm", animation, transition);
+    animate("#right-arm", animation, { ...transition, delay: 0.5 });
   }
 
   function stopMoveArmsAndLegs() {
@@ -62,6 +28,8 @@ export function ManWalk() {
   async function animateMan() {
     moveArmsAndLegs();
 
+    let midpointReached = false;
+
     // walk
     await animate(
       scope.current,
@@ -69,10 +37,16 @@ export function ManWalk() {
       {
         duration: 3,
         ease: "easeInOut",
+        onUpdate: latest => {
+          const middle = -170 / 4;
+
+          if (!midpointReached && latest >= middle) {
+            midpointReached = true;
+            stopMoveArmsAndLegs();
+          }
+        },
       }
     );
-
-    await stopMoveArmsAndLegs();
 
     // rotate
     await Promise.all([
@@ -107,7 +81,7 @@ export function ManWalk() {
     <div className="flex flex-col items-center overflow-hidden">
       <div
         ref={scope}
-        className="flex flex-col items-center"
+        className="flex flex-col items-center translate-x-[-170px]"
       >
         {/* head */}
         <div className="bg-white size-8 rounded-full" />

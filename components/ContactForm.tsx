@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import clsx from "clsx";
-import { sendEmail } from "../actions/sendEmail";
+import { sendEmail } from "../app/actions/sendEmail";
 
 type RequestStatusType = "initial" | "pending" | "success" | "error";
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Rampart_One } from "next/font/google";
 import clsx from "clsx";
-import { ContactForm } from "./_components/ContactForm";
+import { ContactForm } from "@/components/ContactForm";
 
 const rampartFont = Rampart_One({ subsets: ["latin"], weight: "400" });
 
@@ -34,7 +34,7 @@ export default function Home() {
     <main>
       <section
         id="hero"
-        className="container flex items-center justify-between gap-4 max-sm:flex-wrap h-screen mt-4"
+        className="container flex items-center justify-between gap-4 max-sm:flex-wrap h-screen pt-16"
       >
         <div>
           <h1 className={clsx([rampartFont.className, "text-4xl mb-2 font-semibold"])}>Gnoni Gabriele</h1>
@@ -67,7 +67,7 @@ export default function Home() {
         id="about"
         className="container min-h-screen flex flex-col justify-center"
       >
-        <h3 className={clsx([rampartFont.className, "text-5xl font-semibold text-center mb-12"])}>About me</h3>
+        <h3 className={clsx([rampartFont.className, "text-5xl font-semibold text-center mb-12"])}>Chi sono</h3>
 
         <p className="mb-4">
           Sono un frontend developer con esperienza nello sviluppo di interfacce intuitive e moderne, utilizzando
@@ -108,7 +108,7 @@ export default function Home() {
         id="contact"
         className="container h-screen flex flex-col justify-center"
       >
-        <h3 className={clsx([rampartFont.className, "text-5xl font-semibold text-center mb-12"])}>Contact me</h3>
+        <h3 className={clsx([rampartFont.className, "text-5xl font-semibold text-center mb-12"])}>Contattami</h3>
         <ContactForm />
       </section>
     </main>

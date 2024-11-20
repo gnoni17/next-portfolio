@@ -85,7 +85,7 @@ export function Header() {
               },
             ])}
           >
-            About me
+            Chi sono
           </Link>
 
           <Link
@@ -97,7 +97,7 @@ export function Header() {
               },
             ])}
           >
-            Contact
+            Contattami
           </Link>
         </div>
       </div>
