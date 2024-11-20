@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { DOMKeyframesDefinition, DynamicAnimationOptions, useAnimate } from "framer-motion";
 
 export function ManWalk() {
@@ -25,7 +25,7 @@ export function ManWalk() {
     ]);
   }
 
-  async function animateMan() {
+  const animateMan = useCallback(async () => {
     moveArmsAndLegs();
 
     let midpointReached = false;
@@ -71,11 +71,11 @@ export function ManWalk() {
         duration: 2.5,
       }
     );
-  }
+  }, [animate, moveArmsAndLegs, scope, stopMoveArmsAndLegs]);
 
   useEffect(() => {
     animateMan();
-  }, []);
+  }, [animateMan]);
 
   return (
     <div className="flex flex-col items-center overflow-hidden">
