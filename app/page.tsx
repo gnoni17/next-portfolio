@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Rampart_One } from "next/font/google";
 import clsx from "clsx";
 import { ContactForm } from "@/components/ContactForm";
+import Link from "next/link";
 
 const rampartFont = Rampart_One({ subsets: ["latin"], weight: "400" });
 
@@ -34,11 +35,11 @@ export default function Home() {
     <main>
       <section
         id="hero"
-        className="container flex items-center justify-between gap-4 max-sm:flex-wrap min-h-screen pt-16"
+        className="container flex items-center justify-between gap-4 max-sm:flex-wrap py-12 mt-12 xl:min-h-screen"
       >
         <div>
-          <h1 className={clsx([rampartFont.className, "text-4xl mb-2 font-semibold"])}>Gnoni Gabriele</h1>
-          <h2 className={clsx([rampartFont.className, "text-5xl mb-4 font-semibold"])}>
+          <h1 className={clsx([rampartFont.className, "text-2xl sm:text-3xl mb-2 font-semibold"])}>Gnoni Gabriele</h1>
+          <h2 className={clsx([rampartFont.className, "text-5xl mb-6 font-semibold"])}>
             <span className="text-blue-500">Frontend</span> developer
           </h2>
 
@@ -47,12 +48,14 @@ export default function Home() {
             creazione di soluzioni web e mobile innovative e performanti.
           </p>
 
-          <button
-            className="btn btn-primary"
-            type="button"
-          >
-            Contattami
-          </button>
+          <Link href="#contact">
+            <button
+              className="btn btn-primary"
+              type="button"
+            >
+              Contattami
+            </button>
+          </Link>
         </div>
 
         <Image
@@ -65,7 +68,7 @@ export default function Home() {
 
       <section
         id="about"
-        className="container min-h-screen flex flex-col justify-center"
+        className="container flex flex-col justify-center py-12 xl:min-h-screen"
       >
         <h3 className={clsx([rampartFont.className, "text-5xl font-semibold text-center mb-12"])}>Chi sono</h3>
 
@@ -86,7 +89,7 @@ export default function Home() {
           Credo nell&apos;importanza di bilanciare creatività, tecnica e benessere personale.
         </p>
 
-        <div className="flex gap-4 flex-wrap w-full">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 flex-wrap w-full">
           {stack.map(e => (
             <div
               key={e.name}
@@ -106,7 +109,7 @@ export default function Home() {
 
       <section
         id="contact"
-        className="container min-h-screen flex flex-col justify-center"
+        className="container flex flex-col justify-center py-12 xl:min-h-screen"
       >
         <h3 className={clsx([rampartFont.className, "text-5xl font-semibold text-center mb-12"])}>Contattami</h3>
         <ContactForm />
