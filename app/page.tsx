@@ -34,7 +34,7 @@ export default function Home() {
     <main>
       <section
         id="hero"
-        className="container flex items-center justify-between gap-4 max-sm:flex-wrap h-screen pt-16"
+        className="container flex items-center justify-between gap-4 max-sm:flex-wrap min-h-screen pt-16"
       >
         <div>
           <h1 className={clsx([rampartFont.className, "text-4xl mb-2 font-semibold"])}>Gnoni Gabriele</h1>
@@ -106,7 +106,7 @@ export default function Home() {
 
       <section
         id="contact"
-        className="container h-screen flex flex-col justify-center"
+        className="container min-h-screen flex flex-col justify-center"
       >
         <h3 className={clsx([rampartFont.className, "text-5xl font-semibold text-center mb-12"])}>Contattami</h3>
         <ContactForm />
