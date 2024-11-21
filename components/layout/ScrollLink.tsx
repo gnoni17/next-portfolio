@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import Link from 'next/link'
+import { MouseEvent } from 'react'
 
 interface ScrollLinkI extends React.PropsWithChildren {
   id: string
@@ -7,7 +8,7 @@ interface ScrollLinkI extends React.PropsWithChildren {
 }
 
 export function ScrollLink({ id, children, currentSection }: ScrollLinkI) {
-  const handleClick = e => {
+  const handleClick = (e: MouseEvent<HTMLDivElement>) => {
     e.preventDefault()
 
     const element = document.getElementById(id)
