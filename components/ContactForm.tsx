@@ -11,7 +11,7 @@ const initialModel = {
   name: "",
   email: "",
   message: "",
-  surname: ""
+  surname: "",
 };
 
 export function ContactForm() {

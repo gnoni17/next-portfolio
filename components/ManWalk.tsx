@@ -6,7 +6,7 @@ import { DOMKeyframesDefinition, DynamicAnimationOptions, useAnimate } from "fra
 export function ManWalk() {
   const [scope, animate] = useAnimate();
 
-  function moveArmsAndLegs() {
+  const moveArmsAndLegs = useCallback(() => {
     const animation: DOMKeyframesDefinition = { rotate: [-30, 30, -30] };
     const transition: DynamicAnimationOptions = { repeat: Infinity, duration: 1, ease: "easeInOut" };
 
@@ -14,16 +14,16 @@ export function ManWalk() {
     animate("#right-leg", animation, { ...transition, delay: 0.5 });
     animate("#left-arm", animation, transition);
     animate("#right-arm", animation, { ...transition, delay: 0.5 });
-  }
+  }, [animate]);
 
-  function stopMoveArmsAndLegs() {
+  const stopMoveArmsAndLegs = useCallback(() => {
     return Promise.all([
       animate("#left-arm", { rotate: 0 }, { duration: 1 }),
       animate("#right-arm", { rotate: 0 }, { duration: 1 }),
       animate("#left-leg", { rotate: 0 }, { duration: 1 }),
       animate("#right-leg", { rotate: 0 }, { duration: 1 }),
     ]);
-  }
+  }, [animate]);
 
   const animateMan = useCallback(async () => {
     moveArmsAndLegs();
@@ -91,22 +91,22 @@ export function ManWalk() {
           {/* arms */}
           <div
             id="left-arm"
-            className="absolute top-0 bg-white w-2 h-10 origin-top"
+            className="absolute top-0 bg-white w-2 h-10 origin-top rounded-sm"
           />
 
           <div
             id="right-arm"
-            className="absolute top-0 bg-white w-2 h-10 origin-top"
+            className="absolute top-0 bg-white w-2 h-10 origin-top rounded-sm"
           />
 
           {/* legs */}
           <div
             id="left-leg"
-            className="absolute top-12 bg-white w-2 h-12 origin-top"
+            className="absolute top-12 bg-white w-2 h-12 origin-top rounded-sm"
           />
           <div
             id="right-leg"
-            className="absolute top-12 bg-white w-2 h-12 origin-top"
+            className="absolute top-12 bg-white w-2 h-12 origin-top rounded-sm"
           />
         </div>
       </div>

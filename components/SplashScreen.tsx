@@ -12,6 +12,17 @@ export function SplashScreen() {
   const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
+    if (showSplash) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [showSplash]);
+
+  useEffect(() => {
     const timer = setTimeout(() => {
       setShowSplash(false);
     }, 5000);

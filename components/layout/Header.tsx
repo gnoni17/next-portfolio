@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
-import { useRouter } from "next/navigation";
 import clsx from "clsx";
+import { ScrollLink } from "./ScrollLink";
 
 const animationHeader = {
   hidden: {
@@ -64,41 +65,26 @@ export function Header() {
     >
       <div className="bg-slate-800/60 rounded-md backdrop-blur-lg">
         <div className="px-8 py-4 flex gap-4 items-center">
-          <Link
-            href="#hero"
-            className={clsx([
-              "font-semibold",
-              {
-                "text-blue-500": currentSection == "hero",
-              },
-            ])}
+          <ScrollLink
+            id="hero"
+            currentSection={currentSection}
           >
             Home
-          </Link>
+          </ScrollLink>
 
-          <Link
-            href="#about"
-            className={clsx([
-              "font-semibold",
-              {
-                "text-blue-500": currentSection == "about",
-              },
-            ])}
+          <ScrollLink
+            id="about"
+            currentSection={currentSection}
           >
             Chi sono
-          </Link>
-
-          <Link
-            href="#contact"
-            className={clsx([
-              "font-semibold",
-              {
-                "text-blue-500": currentSection == "contact",
-              },
-            ])}
+          </ScrollLink>
+          
+          <ScrollLink
+            id="contact"
+            currentSection={currentSection}
           >
             Contattami
-          </Link>
+          </ScrollLink>
         </div>
       </div>
     </motion.div>

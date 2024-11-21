@@ -3,39 +3,18 @@ import { Rampart_One } from "next/font/google";
 import clsx from "clsx";
 import { ContactForm } from "@/components/ContactForm";
 import Link from "next/link";
+import { capitalize } from "@/utils/capitalize";
 
 const rampartFont = Rampart_One({ subsets: ["latin"], weight: "400" });
 
 export default function Home() {
-  const stack = [
-    {
-      name: "html",
-    },
-    {
-      name: "css",
-    },
-    {
-      name: "javascript",
-    },
-    {
-      name: "typescript",
-    },
-    {
-      name: "react",
-    },
-    {
-      name: "vue",
-    },
-    {
-      name: "tailwind",
-    },
-  ];
+  const stack = ["html", "css", "javascript", "typescript", "react", "vue", "tailwind", "laravel"];
 
   return (
     <main>
       <section
         id="hero"
-        className="container flex items-center justify-between gap-4 max-sm:flex-wrap py-12 mt-12 xl:min-h-screen"
+        className="container flex items-center justify-between gap-4 max-sm:flex-wrap pb-12 pt-24 xl:min-h-screen"
       >
         <div>
           <h1 className={clsx([rampartFont.className, "text-2xl sm:text-3xl mb-2 font-semibold"])}>Gnoni Gabriele</h1>
@@ -92,16 +71,16 @@ export default function Home() {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 flex-wrap w-full">
           {stack.map(e => (
             <div
-              key={e.name}
+              key={e}
               className="flex-1 flex flex-col items-center justify-center gap-1 border border-slate-600 rounded-md p-1 bg-slate-800 hover:bg-slate-700 duration-200"
             >
               <Image
-                src={`/images/technology/${e.name}.svg`}
-                alt={e.name}
+                src={`/images/technology/${e == "laravel" ? `${e}.png` : `${e}.svg`}`}
+                alt={e}
                 width={50}
                 height={50}
               />
-              <span>{e.name}</span>
+              <span>{capitalize(e)}</span>
             </div>
           ))}
         </div>
