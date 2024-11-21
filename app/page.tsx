@@ -14,7 +14,7 @@ export default function Home() {
     <main>
       <section
         id="hero"
-        className="container flex items-center justify-between gap-4 max-sm:flex-wrap pb-12 pt-24 xl:min-h-screen"
+        className="container flex items-center justify-between gap-12 max-sm:flex-wrap pb-12 pt-24 xl:min-h-screen"
       >
         <div>
           <h1 className={clsx([rampartFont.className, 'text-2xl sm:text-3xl mb-2 font-semibold'])}>Gnoni Gabriele</h1>
@@ -34,7 +34,7 @@ export default function Home() {
           </Link>
         </div>
 
-        <Image src="/images/portfolio-image1.webp" alt="image" width={400} height={400} />
+        <Image src="/images/hero.png" alt="image" width={550} height={400} />
       </section>
 
       <section id="about" className="container flex flex-col justify-center py-12 xl:min-h-screen">

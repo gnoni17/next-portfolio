@@ -43,16 +43,16 @@ export function ContactForm() {
         <input type="text" {...register('surname')} />
       </label>
 
-      <FormItem label="Nome" error={errors.name}>
-        <input type="text" {...register('name')} />
+      <FormItem label="Nome e Cognome / Azienda" error={errors.name}>
+        <input type="text" {...register('name')} autoComplete="off" />
       </FormItem>
 
       <FormItem label="Email" error={errors.email}>
-        <input type="email" {...register('email')} />
+        <input type="email" {...register('email')} autoComplete="off" />
       </FormItem>
 
       <FormItem label="Messaggio" error={errors.message}>
-        <textarea {...register('message')}></textarea>
+        <textarea className="-mb-1" {...register('message')} autoComplete="off"></textarea>
       </FormItem>
 
       <ServerError haveError={requestStatus == 'error'} errorMessage={serverError} />
