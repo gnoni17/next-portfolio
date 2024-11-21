@@ -1,126 +1,86 @@
 "use client";
 
 import { useState } from "react";
-import clsx from "clsx";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { sendEmail } from "../app/actions/sendEmail";
+import { ContactSchema, ContactSchemaType } from "@/schemas/contactSchemas";
+import { FormItem } from "./FormItem";
+import { ServerError } from "./ServerError";
 
 type RequestStatusType = "initial" | "pending" | "success" | "error";
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-const initialModel = {
-  name: "",
-  email: "",
-  message: "",
-  surname: "",
-};
 
 export function ContactForm() {
-  const [model, setModel] = useState({ ...initialModel });
-  const [isDirty, setIsDirty] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<ContactSchemaType>({ resolver: zodResolver(ContactSchema) });
+
   const [requestStatus, setRequestStatus] = useState<RequestStatusType>("initial");
+  const [serverError, setServerError] = useState<null | string>(null);
 
-  const nameIsValid = model.name.length >= 3;
-  const messageIsValid = model.message.length >= 10;
-  const emailIsValid = emailRegex.test(model.email);
-  const formIsValid = nameIsValid && messageIsValid && emailIsValid;
-
-  function handleInputChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-    const { name, value } = e.target;
-
-    setIsDirty(true);
-    setModel(state => ({ ...state, [name]: value }));
-  }
-
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+  const onSubmit: SubmitHandler<ContactSchemaType> = async data => {
     setRequestStatus("pending");
 
-    if (formIsValid) {
-      try {
-        await sendEmail(model);
-        setRequestStatus("success");
-        clear();
-      } catch (_) {
-        setRequestStatus("error");
-      }
+    try {
+      await sendEmail(data);
+      setRequestStatus("success");
+    } catch (err: { message: string }) {
+      setServerError(err.message);
+      setRequestStatus("error");
     }
-  }
-
-  function clear() {
-    setModel({ ...initialModel });
-    setIsDirty(false);
-  }
+  };
 
   return (
     <form
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col gap-4 border border-gray-700 bg-slate-800 p-4 rounded-md"
     >
       <label className="hidden">
         <input
           type="text"
-          name="surname"
-          value={model.surname}
-          onChange={handleInputChange}
+          {...register("surname")}
         />
       </label>
 
-      <label>
-        <span className="text-sm block mb-1">Nome</span>
+      <FormItem
+        label="Nome"
+        error={errors.name}
+      >
         <input
           type="text"
-          name="name"
-          required
-          minLength={3}
-          value={model.name}
-          onChange={handleInputChange}
-          className={clsx({
-            "input-error": !nameIsValid && isDirty,
-          })}
+          {...register("name")}
         />
-      </label>
+      </FormItem>
 
-      <label>
-        <span className="text-sm block mb-1">Email</span>
+      <FormItem
+        label="Email"
+        error={errors.email}
+      >
         <input
           type="email"
-          name="email"
-          required
-          value={model.email}
-          onChange={handleInputChange}
-          className={clsx({
-            "input-error": !emailIsValid && isDirty,
-          })}
+          {...register("email")}
         />
-      </label>
+      </FormItem>
 
-      <label>
-        <span className="text-sm block mb-1">Messaggio</span>
+      <FormItem
+        label="Messaggio"
+        error={errors.message}
+      >
+        <textarea {...register("message")}></textarea>
+      </FormItem>
 
-        <textarea
-          name="message"
-          required
-          minLength={5}
-          value={model.message}
-          onChange={handleInputChange}
-          className={clsx({
-            "input-error": !messageIsValid && isDirty,
-          })}
-        ></textarea>
-
-        <span className="text-sm text-gray-500 block">Minimo 10 caratteri</span>
-      </label>
-
-      {requestStatus == "error" && (
-        <div className="bg-red-500 text-white p-4 rounded-md">
-          <span>Ops, qualcosa è andato storto</span>
-        </div>
-      )}
+      <ServerError
+        haveError={requestStatus == "error"}
+        errorMessage={serverError}
+      />
 
       <div className="flex justify-end gap-4">
         <button
           type="button"
-          onClick={clear}
+          onClick={() => reset()}
           className="btn btn-outline w-fit"
         >
           Pulisci
@@ -128,7 +88,6 @@ export function ContactForm() {
 
         <button
           type="submit"
-          disabled={!formIsValid}
           className="btn btn-primary w-fit"
         >
           {requestStatus === "pending" ? "Invio in corso..." : "Invia"}

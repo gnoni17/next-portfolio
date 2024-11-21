@@ -2,9 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
-import clsx from "clsx";
 import { ScrollLink } from "./ScrollLink";
 
 const animationHeader = {
