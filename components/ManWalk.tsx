@@ -74,7 +74,9 @@ export function ManWalk() {
   }, [animate, moveArmsAndLegs, scope, stopMoveArmsAndLegs])
 
   useEffect(() => {
-    animateMan()
+    try {
+      animateMan()
+    } catch (_) {}
   }, [animateMan])
 
   return (
