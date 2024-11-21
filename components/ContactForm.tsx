@@ -27,7 +27,8 @@ export function ContactForm() {
     try {
       await sendEmail(data)
       setRequestStatus('success')
-    } catch (err: { message: string }) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
       setServerError(err.message)
       setRequestStatus('error')
     }
