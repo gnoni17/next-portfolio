@@ -1,14 +1,14 @@
-import Image from "next/image";
-import { Rampart_One } from "next/font/google";
-import clsx from "clsx";
-import { ContactForm } from "@/components/ContactForm";
-import Link from "next/link";
-import { capitalize } from "@/utils/capitalize";
+import Image from 'next/image'
+import { Rampart_One } from 'next/font/google'
+import clsx from 'clsx'
+import { ContactForm } from '@/components/ContactForm'
+import Link from 'next/link'
+import { capitalize } from '@/utils/capitalize'
 
-const rampartFont = Rampart_One({ subsets: ["latin"], weight: "400" });
+const rampartFont = Rampart_One({ subsets: ['latin'], weight: '400' })
 
 export default function Home() {
-  const stack = ["html", "css", "javascript", "typescript", "react", "vue", "tailwind", "laravel"];
+  const stack = ['html', 'css', 'javascript', 'typescript', 'react', 'vue', 'tailwind', 'laravel']
 
   return (
     <main>
@@ -17,8 +17,8 @@ export default function Home() {
         className="container flex items-center justify-between gap-4 max-sm:flex-wrap pb-12 pt-24 xl:min-h-screen"
       >
         <div>
-          <h1 className={clsx([rampartFont.className, "text-2xl sm:text-3xl mb-2 font-semibold"])}>Gnoni Gabriele</h1>
-          <h2 className={clsx([rampartFont.className, "text-5xl mb-6 font-semibold"])}>
+          <h1 className={clsx([rampartFont.className, 'text-2xl sm:text-3xl mb-2 font-semibold'])}>Gnoni Gabriele</h1>
+          <h2 className={clsx([rampartFont.className, 'text-5xl mb-6 font-semibold'])}>
             <span className="text-blue-500">Frontend</span> developer
           </h2>
 
@@ -28,28 +28,17 @@ export default function Home() {
           </p>
 
           <Link href="#contact">
-            <button
-              className="btn btn-primary"
-              type="button"
-            >
+            <button className="btn btn-primary" type="button">
               Contattami
             </button>
           </Link>
         </div>
 
-        <Image
-          src="/images/portfolio-image1.webp"
-          alt="image"
-          width={400}
-          height={400}
-        />
+        <Image src="/images/portfolio-image1.webp" alt="image" width={400} height={400} />
       </section>
 
-      <section
-        id="about"
-        className="container flex flex-col justify-center py-12 xl:min-h-screen"
-      >
-        <h3 className={clsx([rampartFont.className, "text-5xl font-semibold text-center mb-12"])}>Chi sono</h3>
+      <section id="about" className="container flex flex-col justify-center py-12 xl:min-h-screen">
+        <h3 className={clsx([rampartFont.className, 'text-5xl font-semibold text-center mb-12'])}>Chi sono</h3>
 
         <p className="mb-4">
           Sono un frontend developer con esperienza nello sviluppo di interfacce intuitive e moderne, utilizzando
@@ -75,7 +64,7 @@ export default function Home() {
               className="flex-1 flex flex-col items-center justify-center gap-1 border border-slate-600 rounded-md p-1 bg-slate-800 hover:bg-slate-700 duration-200"
             >
               <Image
-                src={`/images/technology/${e == "laravel" ? `${e}.png` : `${e}.svg`}`}
+                src={`/images/technology/${e == 'laravel' ? `${e}.png` : `${e}.svg`}`}
                 alt={e}
                 width={50}
                 height={50}
@@ -86,13 +75,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section
-        id="contact"
-        className="container flex flex-col justify-center py-12 xl:min-h-screen"
-      >
-        <h3 className={clsx([rampartFont.className, "text-5xl font-semibold text-center mb-12"])}>Contattami</h3>
+      <section id="contact" className="container flex flex-col justify-center py-12 xl:min-h-screen">
+        <h3 className={clsx([rampartFont.className, 'text-5xl font-semibold text-center mb-12'])}>Contattami</h3>
         <ContactForm />
       </section>
     </main>
-  );
+  )
 }

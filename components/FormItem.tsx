@@ -1,9 +1,9 @@
-import React from "react";
-import { FieldError } from "react-hook-form";
+import React from 'react'
+import { FieldError } from 'react-hook-form'
 
 interface FormItemI extends React.PropsWithChildren {
-  error: FieldError | undefined;
-  label: string;
+  error: FieldError | undefined
+  label: string
 }
 
 export function FormItem({ children, error, label }: FormItemI) {
@@ -13,5 +13,5 @@ export function FormItem({ children, error, label }: FormItemI) {
       {children}
       <span className="text-sm text-red-500">{error && <span>{error.message}</span>}</span>
     </label>
-  );
+  )
 }

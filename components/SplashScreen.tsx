@@ -1,34 +1,34 @@
-"use client";
+'use client'
 
-import React, { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import clsx from "clsx";
-import { Rampart_One } from "next/font/google";
-import { ManWalk } from "./ManWalk";
+import React, { useEffect, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import clsx from 'clsx'
+import { Rampart_One } from 'next/font/google'
+import { ManWalk } from './ManWalk'
 
-const rampartFont = Rampart_One({ subsets: ["latin"], weight: "400" });
+const rampartFont = Rampart_One({ subsets: ['latin'], weight: '400' })
 
 export function SplashScreen() {
-  const [showSplash, setShowSplash] = useState(true);
+  const [showSplash, setShowSplash] = useState(true)
 
   useEffect(() => {
     if (showSplash) {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = 'hidden'
     } else {
-      document.body.style.overflow = "";
+      document.body.style.overflow = ''
     }
     return () => {
-      document.body.style.overflow = "";
-    };
-  }, [showSplash]);
+      document.body.style.overflow = ''
+    }
+  }, [showSplash])
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setShowSplash(false);
-    }, 5000);
+      setShowSplash(false)
+    }, 5000)
 
-    return () => clearTimeout(timer);
-  }, []);
+    return () => clearTimeout(timer)
+  }, [])
 
   return (
     <AnimatePresence>
@@ -39,15 +39,15 @@ export function SplashScreen() {
           exit={{ opacity: 0, scale: 0.9 }}
           transition={{
             duration: 0.8,
-            ease: "easeInOut",
+            ease: 'easeInOut'
           }}
           className="fixed w-full h-screen inset-0 bg-slate-900 z-50 flex flex-col gap-4 items-center justify-center"
         >
           <ManWalk />
 
-          <span className={clsx([rampartFont.className, "text-4xl mb-2 font-semibold"])}>Gnoni Gabriele</span>
+          <span className={clsx([rampartFont.className, 'text-4xl mb-2 font-semibold'])}>Gnoni Gabriele</span>
         </motion.div>
       )}
     </AnimatePresence>
-  );
+  )
 }

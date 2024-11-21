@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 export function ServerError({ haveError, errorMessage }: { haveError: boolean; errorMessage: string | null }) {
   return haveError ? (
@@ -19,8 +19,8 @@ export function ServerError({ haveError, errorMessage }: { haveError: boolean; e
       </svg>
 
       <span className="text-sm text-red-500 font-semibold">
-        {errorMessage ? errorMessage : "Ops, qualcosa è andato storto"}
+        {errorMessage ? errorMessage : 'Ops, qualcosa è andato storto'}
       </span>
     </div>
-  ) : null;
+  ) : null
 }
