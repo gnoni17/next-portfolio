@@ -22,7 +22,7 @@ export default function RootLayout({
         <link rel="icon" href="/icon?svg" type="image/svg" />
       </head>
 
-      <body className={`${interFont.className} antialiased`}>
+      <body className={`${interFont.className} antialiased overflow-hidden`}>
         <SplashScreen />
         <Header />
         {children}

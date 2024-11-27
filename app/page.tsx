@@ -4,6 +4,7 @@ import clsx from 'clsx'
 import { ContactForm } from '@/components/ContactForm'
 import Link from 'next/link'
 import { capitalize } from '@/utils/capitalize'
+import { OpacitySection } from '@/components/OpacitySection'
 
 const rampartFont = Rampart_One({ subsets: ['latin'], weight: '400' })
 
@@ -12,7 +13,7 @@ export default function Home() {
 
   return (
     <main>
-      <section
+      <OpacitySection
         id="hero"
         className="container flex items-center justify-between gap-12 max-sm:flex-wrap pb-12 pt-24 xl:min-h-screen"
       >
@@ -35,26 +36,25 @@ export default function Home() {
         </div>
 
         <Image src="/images/hero.png" alt="image" width={550} height={400} />
-      </section>
+      </OpacitySection>
 
-      <section id="about" className="container flex flex-col justify-center py-12 xl:min-h-screen">
+      <OpacitySection id="about" className="container flex flex-col justify-center py-12 xl:min-h-screen">
         <h3 className={clsx([rampartFont.className, 'text-5xl font-semibold text-center mb-12'])}>Chi sono</h3>
 
         <p className="mb-4">
-          Sono un frontend developer con esperienza nello sviluppo di interfacce intuitive e moderne, utilizzando
-          tecnologie come Vue, React e Laravel. Negli ultimi anni, ho lavorato a diversi progetti, tra cui gestionali
-          personalizzati e siti web responsive, contribuendo a creare esperienze utente fluide e funzionali.
+          Sono un frontend developer con un esperienza di 2 anni nel campo. Negli ultimi anni, ho lavorato a diversi
+          progetti, tra cui la realizzazione di gestionali aziendali e siti web, utilizzando prevalentemente tecnologie
+          come Vue, React e Laravel.
         </p>
 
         <p className="mb-4">
-          La mia passione per il design e la tecnologia mi spinge a trovare soluzioni innovative, mantenendo sempre un
-          occhio di riguardo per l&apos;estetica e le prestazioni. Amo affrontare nuove sfide e imparare costantemente
-          per migliorare le mie competenze.
+          La mia passione per la programmazione mi spinge a mantenermi sempre aggiornato sulle nuove tecnologie e ad
+          imparare costantemente per migliorare le mie competenze.
         </p>
 
         <p className="mb-8">
-          Nel tempo libero mi dedico a disegnare e a migliorare le mie abilità fisiche, praticando palestra e nuoto.
-          Credo nell&apos;importanza di bilanciare creatività, tecnica e benessere personale.
+          Nel tempo libero mi é sempre piaciuto praticare sport, infatti ne ho praticato diversi tra cui judo,
+          muay-thai, palestra e nuoto. Ma mi piace anche rimanere creativo con il disegno.
         </p>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 flex-wrap w-full">
@@ -73,12 +73,12 @@ export default function Home() {
             </div>
           ))}
         </div>
-      </section>
+      </OpacitySection>
 
-      <section id="contact" className="container flex flex-col justify-center py-12 xl:min-h-screen">
+      <OpacitySection id="contact" className="container flex flex-col justify-center py-12 xl:min-h-screen">
         <h3 className={clsx([rampartFont.className, 'text-5xl font-semibold text-center mb-12'])}>Contattami</h3>
         <ContactForm />
-      </section>
+      </OpacitySection>
     </main>
   )
 }
