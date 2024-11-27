@@ -73,7 +73,7 @@ export function ContactForm() {
         <button
           type="submit"
           className={clsx([
-            'btn btn-primary w-fit',
+            'btn btn-primary',
             {
               'btn-primary': requestStatus !== 'success',
               'btn-success': requestStatus === 'success'
@@ -85,7 +85,7 @@ export function ContactForm() {
             <div role="status">
               <svg
                 aria-hidden="true"
-                className="size-6 animate-spin fill-blue-500"
+                className="size-5 animate-spin fill-blue-500"
                 viewBox="0 0 100 101"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -103,8 +103,21 @@ export function ContactForm() {
             </div>
           )}
 
-          {(requestStatus === 'initial' || requestStatus === 'error') && <span>Invia</span>}
-          {requestStatus === 'success' && <span>Inviato</span>}
+          {(requestStatus === 'initial' || requestStatus === 'error') && (
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5">
+              <path d="M3.478 2.404a.75.75 0 0 0-.926.941l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.404Z" />
+            </svg>
+          )}
+
+          {requestStatus === 'success' && (
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5">
+              <path
+                fill-rule="evenodd"
+                d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          )}
         </button>
       </div>
     </form>

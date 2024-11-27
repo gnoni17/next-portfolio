@@ -22,7 +22,7 @@ export async function sendEmail(data: ContactSchemaType) {
   const mailOptions: Mail.Options = {
     from: process.env.MY_EMAIL,
     to: process.env.MY_EMAIL,
-    subject: `Message from ${data.name} (${data.email})`,
+    subject: `Messaggio da ${data.name} (${data.email})`,
     text: data.message
   }
 
